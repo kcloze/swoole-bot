@@ -16,6 +16,13 @@ $config = [
 
     'logPath'   => __DIR__ . '/../log',
     'debug'     => true,
+    'params'    => [
+        'nickName'=> 'RobotH测试群',
+        //管理员微信号
+        'adminAlias'=> 'kcloze',
+        //暗号
+        'cipher'    => '666',
+    ],
 
 ];
 

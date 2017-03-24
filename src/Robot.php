@@ -43,6 +43,7 @@ use Hanson\Vbot\Message\Entity\Voice;
 class Robot
 {
     private $robot;
+    private $config;
     private $path;
 
     public function __construct($config)
@@ -51,7 +52,8 @@ class Robot
                     'tmp'   => $config['logPath'],
                     'debug' => $config['debug'],
                 ]);
-        $this->path =$config['logPath'];
+        $this->config =$config;
+        $this->path   =$config['logPath'];
     }
 
     // 图灵自动回复
@@ -66,7 +68,7 @@ class Robot
     // 设置管理员
     public function isAdmin($message)
     {
-        $adminAlias = 'hanson1994';
+        $adminAlias = $this->config['params']['adminAlias'];
 
         if (in_array($message->fromType, ['Contact', 'Group'], true)) {
             if ($message->fromType === 'Contact') {
@@ -83,11 +85,10 @@ class Robot
     {
         $groupMap = [
             [
-                'nickname' => 'vbot 测试群',
+                'nickname' => $this->config['params']['nickname'],
                 'id'       => 1,
             ],
         ];
-        $path = $this->path;
 
         $this->robot->server->setOnceHandler(function () use ($groupMap) {
             Group::getInstance()->each(function ($group, $key) use ($groupMap) {
@@ -102,7 +103,7 @@ class Robot
                 return $group;
             });
         });
-
+        $path=$this->path;
         $this->robot->server->setMessageHandler(function ($message) use ($path) {
             /** @var $message Message */
             // 位置信息 返回位置文字
@@ -117,7 +118,7 @@ class Robot
             if ($message instanceof Text) {
                 /** @var $message Text */
                 if (str_contains($message->content, 'vbot') && !$message->isAt) {
-                    return "你好，我叫vbot，我爸是HanSon\n我的项目地址是 https://github.com/HanSon/vbot \n欢迎来给我star！";
+                    return '你好，我叫bot机器人，欢迎欢迎！';
                 }
 
                 // 联系人自动回复
@@ -237,11 +238,11 @@ class Robot
             // 请求添加信息
             if ($message instanceof RequestFriend) {
                 /** @var $message RequestFriend */
-                $groupUsername = Group::getInstance()->getGroupsByNickname('芬芬', true)->first()['UserName'];
+                $groupUsername = Group::getInstance()->getGroupsByNickname($this->config['params']['nickname'], true)->first()['UserName'];
 
                 Text::send($groupUsername, "{$message->info['NickName']} 请求添加好友 \"{$message->info['Content']}\"");
 
-                if ($message->info['Content'] === '上山打老虎') {
+                if ($message->info['Content'] === $this->config['params']['cipher']) {
                     Text::send($groupUsername, '暗号正确');
                     $message->verifyUser($message::VIA);
                 } else {
