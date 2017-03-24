@@ -4,15 +4,15 @@
 ### 环境要求
 
 * PHP >= 7.0
+* swoole >= 1.8.9
 
 ### 安装
 
-**请确保已经会使用composer！请确保已经会使用composer！请确保已经会使用composer！**
 
 1、composer
 
 ```
-composer require hanson/vbot
+composer require kcloze/bot
 ```
 
 2、git
@@ -23,11 +23,11 @@ cd vbot
 composer install
 ```
 
-然后执行``` php example/index.php ``` 
+然后执行``` php src/start.php ``` 
 
 PS:运行后二维码将保存于设置的缓存目录，命名为qr.png，控制台也会显示二维码，扫描即可（linux用户请确保已经打开ANSI COLOR）
 
-*警告！执行前请先查看`index.php`的代码，注释掉你认为不需要的代码，避免对其他人好友造成困扰*
+*警告！执行前请先查看`src/Robot.php`的代码，注释掉你认为不需要的代码，避免对其他人好友造成困扰*
 
 **请在terminal运行！请在terminal运行！请在terminal运行！**
 
@@ -158,41 +158,10 @@ $robot->server->run();
 
 ## 参考项目
 
-[lbbniu/WebWechat](https://github.com/lbbniu/WebWechat)
+[hanson/vbot](https://github.com/HanSon/vbot)
 
-[littlecodersh/ItChat](https://github.com/littlecodersh/ItChat) 
 
-感谢楼上两位作者曾对本人耐心解答
+## 感谢
 
-[liuwons/wxBot](https://github.com/liuwons/wxBot) 参考了整个微信的登录流程与消息处理
+[hanson/vbot](https://github.com/HanSon/vbot)
 
-## 贡献者
-
-排名不分先后，时间排序
-
-[zhuanxuhit](https://github.com/zhuanxuhit) terminal显示二维码
-
-[littlecodersh](https://github.com/littlecodersh) 分次加载好友数量方案
-
-[yuanshi2016](https://github.com/yuanshi2016) 分次加载好友数量方案、登录域名方案以及测试
-
-## Q&A
-
-- 问：命令行执行时乱码怎么解决？
-> 设置编码terminal为UTF-8。windows可执行`chcp 65001`
-
-- 问：windows下出错，提示`SSL certificate problem:unable to get local issuer certificate`
-> 可参考 https://easywechat.org/zh-cn/docs/troubleshooting.html
-
-- 问：初始化一直失败
-> 请确认PHP版本是否7
-
-## 问题和建议
-
-有问题或者建议都可以提issue
-
-或者加入我新建的QQ群：492548647
-
-## 打赏
-
-<img src="https://ww2.sinaimg.cn/large/685b97a1gy1fd61orxreaj20yf19fmz1.jpg" height="320"><img src="https://ww2.sinaimg.cn/large/685b97a1gy1fd61qscynwj20ng0zk0tx.jpg" height="320">
