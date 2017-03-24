@@ -36,7 +36,7 @@ composer install
 
 ## 文档
 
-[详细文档](https://github.com/HanSon/vbot/wiki)中
+[详细文档](https://github.com/HanSon/vbot/wiki)
 
 
 
