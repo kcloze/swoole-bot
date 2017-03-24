@@ -23,11 +23,10 @@ class Process
         //\Swoole\Process::daemon();
         $this->config = $config;
         //开启多个进程消费队列
-        for ($i = 0; $i < $this->workNum; $i++) {
+        for ($i = 0; $i < $this->workNum; ++$i) {
             $this->reserveBot($i);
         }
         $this->registSignal($this->workers);
-        //\Swoole\Process::wait();
     }
 
     //独立进程
@@ -92,7 +91,7 @@ class Process
     private function setProcessName($name)
     {
         //mac os不支持进程重命名
-        if (function_exists('swoole_set_process_name') && PHP_OS != 'Darwin') {
+        if (function_exists('swoole_set_process_name') && PHP_OS !== 'Darwin') {
             swoole_set_process_name($name);
         }
     }

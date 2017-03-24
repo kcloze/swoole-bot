@@ -165,7 +165,7 @@ class Robot
                         return 'vbot 从未见过这么犯贱的人';
                     }
 
-                    if ($message->isAt) {
+                    if ($message->isAt || mt_rand(1, 10) > 5 || str_contains($message->content, '踢人')) {
                         return $this->reply($message->content);
                     }
                 }
@@ -189,7 +189,7 @@ class Robot
             // 语音消息
             if ($message instanceof Voice) {
                 /* @var $message Voice */
-        //        return '收到一条语音并下载在' . $message::getPath($message::$folder) . "/{$message->msg['MsgId']}.mp3";
+                //return '收到一条语音并下载在' . $message::getPath($message::$folder) . "/{$message->msg['MsgId']}.mp3";
             }
 
             // 撤回信息
@@ -304,7 +304,7 @@ class Robot
                     return $message->content;
                 } elseif ($message->action === 'RENAME') {
                     //            \Hanson\Vbot\Support\Console::log($message->from['NickName'] . ' 改名为 ' . $message->rename);
-                    if (Group::getInstance()->getUsernameById(1) == $message->from['UserName'] && $message->rename !== 'vbot 测试群') {
+                    if (Group::getInstance()->getUsernameById(1) === $message->from['UserName'] && $message->rename !== 'vbot 测试群') {
                         Group::getInstance()->setGroupName($message->from['UserName'], 'vbot 测试群');
 
                         return '行不改名,坐不改姓！';

@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.0",
         "ext-swoole": ">=1.8.9",
-        "hanson/vbot": "*"
+        "hanson/vbot": "dev-dev"
     },
     "authors": [
         {
