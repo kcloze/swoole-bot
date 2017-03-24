@@ -1,0 +1,32 @@
+{
+    "name": "kcloze/swoole-bot",
+    "description": "基于swoole的微信机器人",
+    "keywords": ["swoole", "bot", "微信机器人", "微信群"],
+    "homepage": "https://github.com/kcloze/swoole-bot",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0",
+        "ext-swoole": ">=1.8.9",
+        "hanson/vbot": "*"
+    },
+    "authors": [
+        {
+            "name": "kcloze",
+            "email": "pei.greet@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kcloze\\Bot\\": "src"
+        }
+    },
+    "repositories": {
+    "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
+
+
+

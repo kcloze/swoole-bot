@@ -1,0 +1,6 @@
+/vendor/
+/log/*
+!/runtime/.gitignore
+composer.lock
+example
+
