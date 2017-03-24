@@ -12,7 +12,7 @@ namespace Kcloze\Bot;
 
 class Process
 {
-    const PROCESS_NAME_LOG = 'php: swoole-bot'; //shell脚本管理标示
+    const PROCESS_NAME_LOG = ' php: swoole-bot'; //shell脚本管理标示
     private $reserveProcess;
     private $workers;
     private $workNum = 1;
