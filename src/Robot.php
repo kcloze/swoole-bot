@@ -59,10 +59,14 @@ class Robot
     // 图灵自动回复
     public function reply($str)
     {
-        return Http::getInstance()->post('http://www.tuling123.com/openapi/api', [
+        $result=Http::getInstance()->post('http://www.tuling123.com/openapi/api', [
             'key'  => '1dce02aef026258eff69635a06b0ab7d',
             'info' => $str,
         ], true)['text'];
+        //记录日志
+        $this->log($result);
+
+        return $result;
     }
 
     // 设置管理员
@@ -328,5 +332,10 @@ class Robot
         });
 
         $this->robot->server->run();
+    }
+
+    public function log($info)
+    {
+        file_put_contents($this->config['logPath'] . '/reply.log', date('Y-m-d H:i:s') . ' ' . $info . PHP_EOL, FILE_APPEND);
     }
 }
