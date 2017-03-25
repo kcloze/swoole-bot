@@ -17,7 +17,9 @@ $config = [
     'logPath'   => __DIR__ . '/../log',
     'debug'     => true,
     'params'    => [
-        'nickName'=> 'web开发',
+        //图灵机器人key
+        'tulingKey'=> '0c75d147ffcd4191a237649f838e4f45',
+        'nickName' => 'web开发',
         //管理员微信号
         'adminAlias'=> 'kcloze',
         //暗号
