@@ -170,11 +170,11 @@ class Robot
                             return 'vbot 从未见过这么犯贱的人';
                         }
 
-                        if ($message->isAt) {
-                            $this->log('UserName: ' . $message->from['UserName']);
+                        //if ($message->isAt) {
+                        $this->log('UserName: ' . $message->from['UserName']);
 
-                            return $this->reply($message->content);
-                        }
+                        return $this->reply($message->content);
+                        //}
                     }
                 }
 
