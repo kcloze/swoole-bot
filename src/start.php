@@ -21,7 +21,7 @@ $config = [
         'tulingApi'=> 'http://www.tuling123.com/openapi/api',
         'tulingKey'=> '1dce02aef026258eff69635a06b0ab7d',
 
-        'nickName' => 'web开发,,,',
+        'nickName' => 'web开发',
         //管理员微信号
         'adminAlias'=> 'kcloze',
         //暗号

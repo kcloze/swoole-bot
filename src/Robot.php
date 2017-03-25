@@ -182,6 +182,7 @@ class Robot
 
             // 图片信息 返回接收到的图片
             if ($message instanceof Image) {
+                //Image::make();
                 //        return $message;
             }
 
