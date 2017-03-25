@@ -138,6 +138,7 @@ class Robot
                             print_r($username);
                             print_r(Group::getInstance()->get($username));
                         }
+                        $this->log('UserName: ' . $message->from['UserName']);
 
                         return $this->reply($message->content);
                         // 群组@我回复
@@ -301,24 +302,24 @@ class Robot
             if ($message instanceof GroupChange) {
                 /** @var $message GroupChange */
                 if ($message->action === 'ADD') {
-                    \Hanson\Vbot\Support\Console::debug('新人进群');
+                    $this->log('新人进群');
 
                     return '欢迎新人 ' . $message->nickname;
                 } elseif ($message->action === 'REMOVE') {
-                    \Hanson\Vbot\Support\Console::debug('群主踢人了');
+                    $this->log('群主踢人了');
 
                     return $message->content;
                 } elseif ($message->action === 'RENAME') {
-                    //            \Hanson\Vbot\Support\Console::log($message->from['NickName'] . ' 改名为 ' . $message->rename);
+                    //            $this->log($message->from['NickName'] . ' 改名为 ' . $message->rename);
                     if (Group::getInstance()->getUsernameById(1) === $message->from['UserName'] && $message->rename !== 'vbot 测试群') {
                         Group::getInstance()->setGroupName($message->from['UserName'], 'vbot 测试群');
 
                         return '行不改名,坐不改姓！';
                     }
                 } elseif ($message->action === 'BE_REMOVE') {
-                    \Hanson\Vbot\Support\Console::debug('你被踢出了群 ' . $message->group['NickName']);
+                    $this->log('你被踢出了群 ' . $message->group['NickName']);
                 } elseif ($message->action === 'INVITE') {
-                    \Hanson\Vbot\Support\Console::debug('你被邀请进群 ' . $message->from['NickName']);
+                    $this->log('你被邀请进群 ' . $message->from['NickName']);
                 }
             }
 
@@ -326,11 +327,11 @@ class Robot
         });
 
         $this->robot->server->setExitHandler(function () {
-            \Hanson\Vbot\Support\Console::log('其他设备登录');
+            $this->log('其他设备登录');
         });
 
         $this->robot->server->setExceptionHandler(function () {
-            \Hanson\Vbot\Support\Console::log('异常退出');
+            $this->log('异常退出');
         });
 
         $this->robot->server->run();

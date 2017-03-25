@@ -23,7 +23,11 @@ cd swoole-bot
 composer install
 ```
 
-然后执行``` php src/start.php ``` 
+然后执行
+``` 
+chmod u+x server.sh
+./server.sh start|stop|restart
+``` 
 
 
 

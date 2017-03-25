@@ -17,9 +17,10 @@ $config = [
     'logPath'   => __DIR__ . '/../log',
     'debug'     => true,
     'params'    => [
-        //图灵机器人key
+        //图灵机器人api
         'tulingApi'=> 'http://www.tuling123.com/openapi/api',
         'tulingKey'=> '1dce02aef026258eff69635a06b0ab7d',
+
         'nickName' => 'web开发',
         //管理员微信号
         'adminAlias'=> 'kcloze',
