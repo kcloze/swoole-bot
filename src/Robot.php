@@ -169,6 +169,8 @@ class Robot
 
                             return 'vbot 从未见过这么犯贱的人';
                         }
+                        $this->log('isAt: ' . (bool) $message->isAt);
+                        $this->log('content: ' . (bool) $message->content);
 
                         if ($message->isAt) {
                             $this->log('NickName: ' . $message->from['NickName']);
