@@ -59,8 +59,8 @@ class Robot
     // 图灵自动回复
     public function reply($str)
     {
-        $result=Http::getInstance()->post('http://www.tuling123.com/openapi/api', [
-            'key'  => '1dce02aef026258eff69635a06b0ab7d',
+        $result=Http::getInstance()->post($this->config['params']['tulingApi'], [
+            'key'  => $this->config['params']['tulingKey'],
             'info' => $str,
         ], true)['text'];
         //记录日志

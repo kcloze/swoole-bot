@@ -18,7 +18,8 @@ $config = [
     'debug'     => true,
     'params'    => [
         //图灵机器人key
-        'tulingKey'=> '0c75d147ffcd4191a237649f838e4f45',
+        'tulingApi'=> 'http://www.tuling123.com/openapi/api',
+        'tulingKey'=> '1dce02aef026258eff69635a06b0ab7d',
         'nickName' => 'web开发',
         //管理员微信号
         'adminAlias'=> 'kcloze',
