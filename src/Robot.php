@@ -169,9 +169,11 @@ class Robot
                             return 'vbot 从未见过这么犯贱的人';
                         }
 
-                        //if ($message->isAt || mt_rand(1, 10) > 5 || str_contains($message->content, '666')) {
+                        if ($message->isAt) {
+                            $this->log('UserName: ' . $message->from['UserName']);
+
                             return $this->reply($message->content);
-                        //}
+                        }
                     }
                 }
 
