@@ -106,70 +106,70 @@ class Robot
         $path=$this->path;
         $this->robot->server->setMessageHandler(function ($message) use ($path) {
             /** @var $message Message */
-            // 位置信息 返回位置文字
-            if ($message instanceof Location) {
-                /* @var $message Location */
-                Text::send('地图链接：' . $message->from['UserName'], $message->url);
+                // 位置信息 返回位置文字
+                if ($message instanceof Location) {
+                    /* @var $message Location */
+                    Text::send('地图链接：' . $message->from['UserName'], $message->url);
 
-                return '位置：' . $message;
-            }
-
-            // 文字信息
-            if ($message instanceof Text) {
-                /** @var $message Text */
-                if (str_contains($message->content, 'vbot') && !$message->isAt) {
-                    return '你好，我叫bot机器人，欢迎欢迎！';
+                    return '位置：' . $message;
                 }
 
-                // 联系人自动回复
-                if ($message->fromType === 'Contact') {
-                    if ($message->content === '拉我') {
-                        $username = Group::getInstance()->getUsernameById(1);
-
-                        Group::getInstance()->addMember($username, $message->from['UserName']);
+                // 文字信息
+                if ($message instanceof Text) {
+                    /** @var $message Text */
+                    if (str_contains($message->content, 'vbot') && !$message->isAt) {
+                        return '你好，我叫bot机器人，欢迎欢迎！';
                     }
 
-                    if ($message->content === '测试') {
-                        $username = Group::getInstance()->getUsernameById(1);
-                        print_r($username);
-                        print_r(Group::getInstance()->get($username));
-                    }
+                    // 联系人自动回复
+                    if ($message->fromType === 'Contact') {
+                        if ($message->content === '拉我') {
+                            $username = Group::getInstance()->getUsernameById(1);
 
-                    return $this->reply($message->content);
-                    // 群组@我回复
-                } elseif ($message->fromType === 'Group') {
-                    if (str_contains($message->content, '设置群名称') && $this->isAdmin($message)) {
-                        Group::getInstance()->setGroupName($message->from['UserName'], str_replace('设置群名称', '', $message->content));
-                    }
-
-                    if (str_contains($message->content, '搜人') && $this->isAdmin($message)) {
-                        $nickname = str_replace('搜人', '', $message->content);
-                        $members = Group::getInstance()->getMembersByNickname($message->from['UserName'], $nickname, true);
-                        $result = '搜索结果 数量：' . count($members) . "\n";
-                        foreach ($members as $member) {
-                            $result .= $member['NickName'] . ' ' . $member['UserName'] . "\n";
+                            Group::getInstance()->addMember($username, $message->from['UserName']);
                         }
 
-                        return $result;
-                    }
+                        if ($message->content === '测试') {
+                            $username = Group::getInstance()->getUsernameById(1);
+                            print_r($username);
+                            print_r(Group::getInstance()->get($username));
+                        }
 
-                    if (str_contains($message->content, '踢人') && $this->isAdmin($message)) {
-                        $username = str_replace('踢人', '', $message->content);
-                        Group::getInstance()->deleteMember($message->from['UserName'], $username);
-                    }
-
-                    if (str_contains($message->content, '踢我') && $message->isAt) {
-                        Text::send($message->from['UserName'], '拜拜 ' . $message->sender['NickName']);
-                        Group::getInstance()->deleteMember($message->from['UserName'], $message->sender['UserName']);
-
-                        return 'vbot 从未见过这么犯贱的人';
-                    }
-
-                    if ($message->isAt || mt_rand(1, 10) > 5 || str_contains($message->content, '踢人')) {
                         return $this->reply($message->content);
+                        // 群组@我回复
+                    } elseif ($message->fromType === 'Group') {
+                        if (str_contains($message->content, '设置群名称') && $this->isAdmin($message)) {
+                            Group::getInstance()->setGroupName($message->from['UserName'], str_replace('设置群名称', '', $message->content));
+                        }
+
+                        if (str_contains($message->content, '搜人') && $this->isAdmin($message)) {
+                            $nickname = str_replace('搜人', '', $message->content);
+                            $members = Group::getInstance()->getMembersByNickname($message->from['UserName'], $nickname, true);
+                            $result = '搜索结果 数量：' . count($members) . "\n";
+                            foreach ($members as $member) {
+                                $result .= $member['NickName'] . ' ' . $member['UserName'] . "\n";
+                            }
+
+                            return $result;
+                        }
+
+                        if (str_contains($message->content, '踢人') && $this->isAdmin($message)) {
+                            $username = str_replace('踢人', '', $message->content);
+                            Group::getInstance()->deleteMember($message->from['UserName'], $username);
+                        }
+
+                        if (str_contains($message->content, '踢我') && $message->isAt) {
+                            Text::send($message->from['UserName'], '拜拜 ' . $message->sender['NickName']);
+                            Group::getInstance()->deleteMember($message->from['UserName'], $message->sender['UserName']);
+
+                            return 'vbot 从未见过这么犯贱的人';
+                        }
+
+                        //if ($message->isAt || mt_rand(1, 10) > 5 || str_contains($message->content, '666')) {
+                            return $this->reply($message->content);
+                        //}
                     }
                 }
-            }
 
             // 图片信息 返回接收到的图片
             if ($message instanceof Image) {
