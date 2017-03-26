@@ -44,12 +44,13 @@ chmod u+x server.sh
 * 自动监控子进程，意外退出后会自动恢复，保证服务稳定性
 * 目前没考虑修改原作者的底层封装，后期可考虑用swoole task提高性能
 
-##体验demo
+### 体验demo
 * 微信添加微信好友：ysrg2014
 * 输入验证关键字：666
 * 对话输入自己想说的话，微信机器人机会跟您聊天了
 
-![效果截图](swoole-bot.jpg)
+![效果截图1](swoole-bot-demo-1.jpg)
+![效果截图2](swoole-bot-demo-2.jpg)
 
 
 ## 文档
