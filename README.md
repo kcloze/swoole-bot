@@ -49,8 +49,8 @@ chmod u+x server.sh
 * 输入验证关键字：666
 * 对话输入自己想说的话，微信机器人机会跟您聊天了
 
-![效果截图1](swoole-bot-demo-1.jpg)
-![效果截图2](swoole-bot-demo-2.jpg)
+![效果截图1](swoole-bot-demo-1.png)
+![效果截图2](swoole-bot-demo-2.png)
 
 
 ## 文档
