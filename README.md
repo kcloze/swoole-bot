@@ -9,13 +9,13 @@
 ### 安装
 
 
-1、composer
+1. composer
 
 ```
 composer require kcloze/swoole-bot
 ```
 
-2、git
+2. git
 
 ```
 git clone https://github.com/kcloze/swoole-bot.git
@@ -24,10 +24,18 @@ composer install
 ```
 
 然后执行
+
 ``` 
 chmod u+x server.sh
 ./server.sh start|stop|restart
+
 ``` 
+3. 配置nginx访问,根目录为swoole-bot
+* 浏览器访问：localhost/log/qr.png
+* 手机扫码登录
+
+
+
 
 
 
