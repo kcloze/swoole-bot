@@ -80,7 +80,9 @@ chmod u+x server.sh
 
 ## 6. 感谢
 
-[hanson/vbot](https://github.com/HanSon/vbot)
+* [hanson/vbot](https://github.com/HanSon/vbot)
+* [swoole](http://www.swoole.com/)
+* [图灵机器人](http://www.tuling123.com/)
 
 ## 7. QQ群
 * 141059677
