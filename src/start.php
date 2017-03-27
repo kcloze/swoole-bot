@@ -3,6 +3,7 @@
 /*
  * This file is part of PHP CS Fixer.
  * (c) kcloze <pei.greet@qq.com>
+ *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -20,7 +21,7 @@ $config = [
         'tulingApi'=> 'http://www.tuling123.com/openapi/api',
         'tulingKey'=> '1dce02aef026258eff69635a06b0ab7d',
 
-        'nickName' => 'web开发',
+        'nickname' => 'web开发',
         //管理员微信号
         'adminAlias'=> 'kcloze',
         //暗号

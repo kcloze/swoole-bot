@@ -1,6 +1,6 @@
 /vendor/
 /log/*
-!/runtime/.gitignore
+!/log/.gitignore
 composer.lock
 example
 
