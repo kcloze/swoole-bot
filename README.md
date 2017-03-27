@@ -30,8 +30,14 @@ chmod u+x server.sh
 ./server.sh start|stop|restart
 
 ``` 
-3. 配置nginx访问,根目录为swoole-bot
-* 浏览器访问：localhost/log/qr.png
+3. 配置nginx访问,根目录为:swoole-bot/log/session，必须添加autoindex选项，qr.png为扫描登录的二维码
+```
+        root   /data/www/swoole-bot/log/session;
+        index  index.html index.htm index.php;
+        autoindex on;
+
+```
+* 浏览器访问：localhost,在点击随机生成的目录下的图片
 * 手机扫码登录
 
 
@@ -49,8 +55,7 @@ chmod u+x server.sh
 * 输入验证关键字：666
 * 对话输入自己想说的话，微信机器人机会跟您聊天了
 
-![效果截图1](swoole-bot-demo-1.png)
-![效果截图1](swoole-bot-demo-2.png)
+![效果截图1](demo-1.png)
 
 
 ## 文档
