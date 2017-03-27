@@ -45,7 +45,7 @@ chmod u+x server.sh
         autoindex on;
 
 ```
-* 浏览器访问：localhost,在点击随机生成的目录下的图片
+* 浏览器访问：localhost,在点击随机生成的目录下的图片（注意选择日期最新的目录，每次过期会重新生成session目录）
 * 手机扫码登录
 
 
