@@ -25,7 +25,8 @@ function start(){
     echo 'starting swooler-bot server...'
 
     php $processFile  >> log/server.log 2>&1
-
+    # 删除session目录
+    rm -rf log/session/*
 
     printf $?
     if [ $? == 0 ]; then

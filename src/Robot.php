@@ -3,6 +3,7 @@
 /*
  * This file is part of PHP CS Fixer.
  * (c) kcloze <pei.greet@qq.com>
+ *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -61,11 +62,12 @@ class Robot
         $result=Http::getInstance()->post($this->config['params']['tulingApi'], [
             'key'  => $this->config['params']['tulingKey'],
             'info' => $str,
-        ], true)['text'];
+        ], true);
         //记录日志
-        $this->log($result);
+        $this->log(var_export($result, true));
+        $url=isset($result['url']) ? ' ' . $result['url'] : '';
 
-        return $result;
+        return $result['text'] . $url;
     }
 
     // 设置管理员
