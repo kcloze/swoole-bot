@@ -27,9 +27,11 @@ function start(){
     rm -rf log/session/*
     # 启动服务
     php $processFile  >> log/server.log 2>&1
+
+    sleep 2
     # 修改目录权限，让PHP-FPM可以访问，用户浏览下预览二维码
     chmod -R 777 log/session/
-    sleep 1
+    
 
     printf $?
     if [ $? == 0 ]; then
