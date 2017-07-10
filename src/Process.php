@@ -2,7 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) kcloze <pei.greet@qq.com>
+ * (c) php-team@yaochufa <php-team@yaochufa.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -19,7 +19,7 @@ class Process
 
     public function start($config)
     {
-        \Swoole\Process::daemon();
+        //\Swoole\Process::daemon();
         $this->config = $config;
         //开启多个进程消费队列
         for ($i = 0; $i < $this->workNum; $i++) {
@@ -39,7 +39,7 @@ class Process
             //设置进程名字
             $this->setProcessName('job ' . $workNum . $self::PROCESS_NAME_LOG);
             try {
-                $job = new Robot($self->config);
+                $job = new Robots($self->config);
                 $job->run();
             } catch (Exception $e) {
                 echo $e->getMessage();
@@ -77,7 +77,7 @@ class Process
 
     private function exitMaster()
     {
-        @unlink($this->config['logPath'] . '/master.pid.log');
+        @unlink($this->config['log']['system'] . '/master.pid.log');
         $this->log('Time: ' . microtime(true) . '主进程退出' . "\n");
         exit();
     }
@@ -97,6 +97,6 @@ class Process
 
     private function log($txt)
     {
-        file_put_contents($this->config['logPath'] . '/worker.log', $txt . "\n", FILE_APPEND);
+        file_put_contents($this->config['log']['system'].'/worker.log', $txt . "\n", FILE_APPEND);
     }
 }

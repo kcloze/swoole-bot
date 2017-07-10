@@ -12,23 +12,7 @@ date_default_timezone_set('Asia/Shanghai');
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$config = [
-
-    'logPath'   => __DIR__ . '/../log',
-    'debug'     => true,
-    'params'    => [
-        //图灵机器人api
-        'tulingApi'=> 'http://www.tuling123.com/openapi/api',
-        'tulingKey'=> '1dce02aef026258eff69635a06b0ab7d',
-
-        'nickname' => 'web开发',
-        //管理员微信号
-        'adminAlias'=> 'kcloze',
-        //暗号
-        'cipher'    => '666',
-    ],
-
-];
+$config = require_once __DIR__ . '/config.php';
 
 //启动
 $process = new Kcloze\Bot\Process();
