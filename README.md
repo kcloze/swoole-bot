@@ -16,6 +16,7 @@
 
 * PHP >= 7.0
 * swoole >= 1.8.9
+* vbot >= 2.0
 
 ### 2.2 安装方式
 
@@ -39,22 +40,11 @@ composer install
 
 
 ``` 
-chmod u+x server.sh
-./server.sh start|stop|restart
+cd src
+php start.php
 
 ``` 
-### 2.3 配置nginx，访问登录二维码
 
-* 配置nginx访问,根目录为:swoole-bot/log/session，必须添加autoindex选项，qr.png为扫描登录的二维码
-
-```
-        root   /data/www/swoole-bot/log/session;
-        index  index.html index.htm index.php;
-        autoindex on;
-
-```
-* 浏览器访问：localhost,在点击随机生成的目录下的图片（注意选择日期最新的目录，每次过期会重新生成session目录）
-* 手机扫码登录
 
 
 
