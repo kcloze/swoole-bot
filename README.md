@@ -3,7 +3,7 @@
 * 项目原理: 模拟微信网页版登录,如果网页版本没有的功能，这个项目项目也是无能为力的
 * 该项目主要目的想利用swoole，增强原生PHP cli的能力，默认是daemon的守护进程模式
 * 直接使用hanson/vbot库，swoole-bot只是增加swoole版本的入口,这样有利用新功能迭代
-* 已经支持多用户登录，修改Proccess.php 的$workNum可以控制默认启动进程数
+* 已经支持多用户登录，修改src/config.php 的workNum可以控制默认启动进程数
 * 自动监控子进程，意外退出后会自动恢复，保证服务稳定性
 
 ### 1.1 流程图
@@ -35,7 +35,10 @@ cd swoole-bot
 composer install
 ```
 
-### 2.3 管理服务
+### 2.3 修改配置项
+* tulingKey必须配置，[需要先注册图灵机器人信息](http://www.tuling123.com/help/h_cent_webapi.jhtml?nav=doc)
+
+### 2.4 启动服务
 
 
 ``` 
@@ -57,7 +60,8 @@ php start.php
 
 ## 4. 文档
 
-[详细文档](https://github.com/HanSon/vbot/wiki)
+[vbot文档](http://create.hanc.cc/vbot/docs/)
+[图灵机器人文档](http://www.tuling123.com/help/h_cent_webapi.jhtml?nav=doc)
 
 
 
