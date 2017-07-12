@@ -2,7 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) php-team@yaochufa <php-team@yaochufa.com>
+ * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -12,13 +12,12 @@ $path           = __DIR__ . '/../tmp/';
 return $options = [
    'path'     => $path,
    /*
-    * swoole 配置项（执行主动发消息命令必须要开启，且必须安装 swoole 插件）
+    * swoole 配置项
     */
-   /*'swoole'  => [
-       'status' => true,
-       'ip'     => '127.0.0.1',
-       'port'   => '8866',
-   ],*/
+   'swoole'  => [
+        //默认允许几个机器人登录
+        'workNum'=> 2,
+   ],
    /*
     * 下载配置项
     */
@@ -76,7 +75,7 @@ return $options = [
    ],
    'params'=> [
        'tulingApi'=> 'http://www.tuling123.com/openapi/api',
-       'tulingKey'=> '***',
+       'tulingKey'=> '',
    ],
 
 ];

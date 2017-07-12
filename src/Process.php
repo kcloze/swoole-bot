@@ -2,7 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) php-team@yaochufa <php-team@yaochufa.com>
+ * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -14,16 +14,18 @@ class Process
     const PROCESS_NAME_LOG = ' php: swoole-bot'; //shell脚本管理标示
     private $reserveProcess;
     private $workers;
-    private $workNum = 1;
+    private $workNum = 2;
     private $config  = [];
 
     public function start($config)
     {
-        //\Swoole\Process::daemon();
-        $this->config = $config;
+        \Swoole\Process::daemon();
+        isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
+        $this->config                                        = $config;
         //开启多个进程消费队列
         for ($i = 0; $i < $this->workNum; $i++) {
             $this->reserveBot($i);
+            sleep(2);
         }
         $this->registSignal($this->workers);
     }
@@ -97,6 +99,6 @@ class Process
 
     private function log($txt)
     {
-        file_put_contents($this->config['log']['system'].'/worker.log', $txt . "\n", FILE_APPEND);
+        file_put_contents($this->config['log']['system'] . '/worker.log', $txt . "\n", FILE_APPEND);
     }
 }

@@ -2,7 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) php-team@yaochufa <php-team@yaochufa.com>
+ * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -25,7 +25,7 @@ class Robots
     public function run()
     {
         $this->robot->messageHandler->setHandler(function ($message) {
-            $reply=new Reply($message,$this->options);
+            $reply=new Reply($message, $this->options);
             $reply->send();
         });
         $this->robot->server->serve();

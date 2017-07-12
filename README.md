@@ -5,7 +5,6 @@
 * 直接使用hanson/vbot库，swoole-bot只是增加swoole版本的入口,这样有利用新功能迭代
 * 已经支持多用户登录，修改Proccess.php 的$workNum可以控制默认启动进程数
 * 自动监控子进程，意外退出后会自动恢复，保证服务稳定性
-* 目前没考虑修改原作者的底层封装，后期可考虑用swoole task提高性能
 
 ### 1.1 流程图
 ![微信机器人执行流程图](flowchart2.png)

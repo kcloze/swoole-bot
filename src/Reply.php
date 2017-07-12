@@ -2,7 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) php-team@yaochufa <php-team@yaochufa.com>
+ * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -28,8 +28,11 @@ class Reply
         $type=$this->message['type'];
         switch ($type) {
             case 'text':
-                $return=$this->getTulingBot();
-                Text::send($this->message['from']['UserName'], $return);
+                //isAt
+                if (true == $this->message['isAt']) {
+                    $return=$this->getTulingBot();
+                    Text::send($this->message['from']['UserName'], $return);
+                }
                 break;
             case 'voice':
                 // code...
@@ -67,7 +70,7 @@ class Reply
                 'info'  => $str,
             ]
         )]);
-        $res=$res->getBody()->getContents();
+        $res    =$res->getBody()->getContents();
         $content=json_decode($res, true);
         $url    =isset($content['url']) ? ' ' . $content['url'] : '';
 
