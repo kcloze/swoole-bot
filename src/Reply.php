@@ -28,11 +28,12 @@ class Reply
         $type=$this->message['type'];
         switch ($type) {
             case 'text':
-                //isAt
-                if (true == $this->message['isAt']) {
+                //@我或者联系人发消息都自动回复
+                if (true == $this->message['isAt'] || $this->message['fromType']=='Contact') {
                     $return=$this->getTulingBot();
                     Text::send($this->message['from']['UserName'], $return);
                 }
+
                 break;
             case 'voice':
                 // code...
