@@ -60,8 +60,8 @@ php start.php
 
 ## 4. 文档
 
-[vbot文档](http://create.hanc.cc/vbot/docs/)
-[图灵机器人文档](http://www.tuling123.com/help/h_cent_webapi.jhtml?nav=doc)
+* [vbot文档](http://create.hanc.cc/vbot/docs/)
+* [图灵机器人文档](http://www.tuling123.com/help/h_cent_webapi.jhtml?nav=doc)
 
 
 
