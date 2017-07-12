@@ -9,6 +9,8 @@
 
 namespace Kcloze\Bot;
 
+use Hanson\Vbot\Foundation\Vbot;
+
 class Robots
 {
     private $robot;
@@ -16,14 +18,15 @@ class Robots
 
     public function __construct($options)
     {
-        $this->robot   = new \Hanson\Vbot\Foundation\Vbot($options);
+        $this->robot   = new Vbot($options);
         $this->options =$options;
     }
 
     public function run()
     {
         $this->robot->messageHandler->setHandler(function ($message) {
-            \Hanson\Vbot\Message\Text::send($message['from']['UserName'], 'Hi, I\'m Vbot!');
+            $reply=new Reply($message,$this->options);
+            $reply->send();
         });
         $this->robot->server->serve();
     }

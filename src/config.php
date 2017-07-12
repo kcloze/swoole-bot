@@ -6,17 +6,19 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-$path    = __DIR__ . '/../tmp/';
+
+$path           = __DIR__ . '/../tmp/';
+
 return $options = [
    'path'     => $path,
    /*
     * swoole 配置项（执行主动发消息命令必须要开启，且必须安装 swoole 插件）
     */
-   'swoole'  => [
+   /*'swoole'  => [
        'status' => true,
        'ip'     => '127.0.0.1',
        'port'   => '8866',
-   ],
+   ],*/
    /*
     * 下载配置项
     */
@@ -72,4 +74,9 @@ return $options = [
            'nickname' => '',
        ],
    ],
+   'params'=> [
+       'tulingApi'=> 'http://www.tuling123.com/openapi/api',
+       'tulingKey'=> '***',
+   ],
+
 ];

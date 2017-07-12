@@ -2,8 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) kcloze <pei.greet@qq.com>
- *
+ * (c) php-team@yaochufa <php-team@yaochufa.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -11,10 +10,7 @@
 date_default_timezone_set('Asia/Shanghai');
 
 require __DIR__ . '/../vendor/autoload.php';
-echo __DIR__ . '/../vendor/autoload.php';
-
 $config = require_once __DIR__ . '/config.php';
-
 //启动
 $process = new Kcloze\Bot\Process();
 $process->start($config);
