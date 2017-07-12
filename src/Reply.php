@@ -28,8 +28,8 @@ class Reply
         $type=$this->message['type'];
         switch ($type) {
             case 'text':
-                //@我或者联系人发消息都自动回复
-                if (true == $this->message['isAt'] || $this->message['fromType']=='Contact') {
+                //@我或者好友发消息都自动回复
+                if (true == $this->message['isAt'] || $this->message['fromType']=='Friend') {
                     $return=$this->getTulingBot();
                     Text::send($this->message['from']['UserName'], $return);
                 }
