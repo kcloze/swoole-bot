@@ -21,8 +21,9 @@ class Process
     {
         \Swoole\Process::daemon();
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
-        $this->config                                        = $config;
-        //开启多个进程消费队列
+
+        $this->config = $config;
+        //根据配置信息，开启多个进程
         for ($i = 0; $i < $this->workNum; $i++) {
             $this->reserveBot($i);
             sleep(2);
@@ -41,12 +42,13 @@ class Process
             //设置进程名字
             $this->setProcessName('job ' . $workNum . $self::PROCESS_NAME_LOG);
             try {
-                $self->config['session']='swoole-bot'.$workNum;
+                $self->config['session']='swoole-bot' . $workNum;
                 $job = new Robots($self->config);
                 $job->run();
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
+            
             echo 'reserve process ' . $workNum . " is working ...\n";
         });
         $pid                 = $reserveProcess->start();
