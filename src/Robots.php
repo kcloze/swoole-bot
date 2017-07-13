@@ -21,11 +21,9 @@ class Robots
         $this->options =$options;
     }
 
-    public function run($sessionKey='')
+    public function run()
     {
-        if (!empty($sessionKey)) {
-            $this->options['session']=$sessionKey;
-        }
+
         $this->robot = new Vbot($this->options);
         $this->robot->messageHandler->setHandler(function ($message) {
             $reply=new Reply($message, $this->options);

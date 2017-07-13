@@ -41,8 +41,9 @@ class Process
             //设置进程名字
             $this->setProcessName('job ' . $workNum . $self::PROCESS_NAME_LOG);
             try {
+                $self->config['session']='swoole-bot'.$workNum;
                 $job = new Robots($self->config);
-                $job->run('swoole-bot'.$workNum);
+                $job->run();
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
