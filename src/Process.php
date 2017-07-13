@@ -42,7 +42,7 @@ class Process
             $this->setProcessName('job ' . $workNum . $self::PROCESS_NAME_LOG);
             try {
                 $job = new Robots($self->config);
-                $job->run();
+                $job->run('swoole-bot'.$workNum);
             } catch (Exception $e) {
                 echo $e->getMessage();
             }

@@ -16,7 +16,7 @@ return $options = [
     */
    'swoole'  => [
         //默认允许几个机器人登录
-        'workNum'=> 1,
+        'workNum'=> 2,
    ],
    /*
     * 下载配置项

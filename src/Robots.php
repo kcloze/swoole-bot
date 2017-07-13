@@ -18,12 +18,15 @@ class Robots
 
     public function __construct($options)
     {
-        $this->robot   = new Vbot($options);
         $this->options =$options;
     }
 
-    public function run()
+    public function run($sessionKey='')
     {
+        if (!empty($sessionKey)) {
+            $this->options['session']=$sessionKey;
+        }
+        $this->robot = new Vbot($this->options);
         $this->robot->messageHandler->setHandler(function ($message) {
             $reply=new Reply($message, $this->options);
             $reply->send();
