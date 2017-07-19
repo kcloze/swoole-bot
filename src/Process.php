@@ -19,7 +19,7 @@ class Process
 
     public function start($config)
     {
-        \Swoole\Process::daemon(false,false);
+        \Swoole\Process::daemon(false);
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
 
         $this->config = $config;
