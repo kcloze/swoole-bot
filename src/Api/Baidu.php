@@ -21,21 +21,6 @@ class Baidu
         $this->text    = $text;
     }
 
-    // public function search()
-    // {
-    //     $client = new Client();
-    //     //$url=$this->options['params']['tulingApi'];
-    //     $url    ='https://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&sf=1&fmq=&pv=&ic=0&nc=1&z=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&fm=index&pos=history&word=' . $this->text;
-    //     $res    = $client->request('POST', $url);
-    //     $res    =$res->getBody()->getContents();
-    //     var_dump($res);
-    //     exit;
-    //     $content=json_decode($res, true);
-    //     $url    =isset($content['url']) ? ' ' . $content['url'] : '';
-
-    //     return $content['text'] . $url;
-    // }
-
     public function search($word, $page=1)
     {
         $pn     = ($page - 1) * 10;

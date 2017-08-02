@@ -34,9 +34,9 @@ class Reply
             case 'text':
                 //@我或者好友发消息都自动回复
                 if (true == $this->message['isAt'] || $this->message['fromType'] == 'Friend') {
-                    if (strstr($this->message['isAt'], '百度') !== false) {
+                    if (strstr($this->message['pure'], '百度') !== false) {
                         $baidu   = new Baidu();
-                        $return  = $baidu->search2('众泰汽车');
+                        $return  = $baidu->search($this->message['pure']);
                         foreach ((array) $return as $key => $value) {
                             if (isset($value['title']) && isset($value['url'])) {
                                 Text::send($this->message['from']['UserName'], $value['title'] . ' ' . $value['url']);
