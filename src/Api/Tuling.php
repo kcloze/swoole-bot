@@ -15,9 +15,10 @@ class Tuling
 {
     private $client;
 
-    public function __construct()
+    public function __construct($options)
     {
         $this->client  = new Client();
+        $this->options =$options;
     }
 
     public function search($text)

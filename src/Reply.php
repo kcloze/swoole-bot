@@ -2,14 +2,13 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) kcloze <pei.greet@qq.com>
+ *  * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
 namespace Kcloze\Bot;
 
-use GuzzleHttp\Client;
 use Hanson\Vbot\Message\Text;
 use Kcloze\Bot\Api\Baidu;
 use Kcloze\Bot\Api\Tuling;
@@ -43,7 +42,7 @@ class Reply
                             }
                         }
                     } else {
-                        $tuling =new Tuling();
+                        $tuling =new Tuling($this->options);
                         $return =$tuling->search($this->message['pure']);
                         Text::send($this->message['from']['UserName'], $return);
                     }
@@ -79,23 +78,5 @@ class Reply
                 break;
 
         }
-    }
-
-    private function getTulingBot()
-    {
-        $client = new Client();
-        $str    =$this->message['pure'];
-        $res    = $client->request('POST', $this->options['params']['tulingApi'],
-        ['body' => json_encode(
-            [
-                'key'   => $this->options['params']['tulingKey'],
-                'info'  => $str,
-            ]
-        )]);
-        $res    =$res->getBody()->getContents();
-        $content=json_decode($res, true);
-        $url    =isset($content['url']) ? ' ' . $content['url'] : '';
-
-        return $content['text'] . $url;
     }
 }
