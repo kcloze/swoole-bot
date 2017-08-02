@@ -32,8 +32,19 @@ class Reply
             case 'text':
                 //@我或者好友发消息都自动回复
                 if (true == $this->message['isAt'] || $this->message['fromType'] == 'Friend') {
-                    $return=$this->getTulingBot();
-                    Text::send($this->message['from']['UserName'], $return);
+                    if (strstr($this->message['isAt'], '百度') !== false) {
+                        $baidu   = new Baidu();
+                        $return  = $baidu->search2('众泰汽车');
+                        foreach ((array) $return as $key => $value) {
+                            if (isset($value['title']) && isset($value['url'])) {
+                                Text::send($this->message['from']['UserName'], $value['title'] . ' ' . $value['url']);
+                            }
+                        }
+                    } else {
+                        $tuling =new Tuling();
+                        $return =$tuling->search($this->message['pure']);
+                        Text::send($this->message['from']['UserName'], $return);
+                    }
                 }
 
                 break;
