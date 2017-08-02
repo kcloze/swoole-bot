@@ -19,7 +19,7 @@ class Baidu
 
     public function search($word, $page=1)
     {
-        $pn     = ($page - 1) * 10;
+        $pn     = ($page - 1) * 5;
         $url    = "http://www.baidu.com/s?wd={$word}&pn={$pn}";
         $url    = str_replace(' ', '+', $url);
         $header =  [
