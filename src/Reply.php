@@ -26,6 +26,8 @@ class Reply
     public function send()
     {
         $type=$this->message['type'];
+        vbot('console')->log('Message Type：' . $type . ' From: ' . $this->message['from']['UserName']);
+
         switch ($type) {
             case 'text':
                 //@我或者好友发消息都自动回复
