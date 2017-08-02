@@ -2,12 +2,12 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) kcloze <pei.greet@qq.com>
+ *  * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-$path           = __DIR__ . '/../tmp/';
+$path           = __DIR__ . '/tmp/';
 
 return $options = [
    'path'     => $path,
