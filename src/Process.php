@@ -42,7 +42,7 @@ class Process
     {
         $self = $this;
         $ppid = getmypid();
-        file_put_contents($this->config['path'] . '/' . self::PID_FILE, $ppid);
+        file_put_contents($this->config['path'] . self::PID_FILE, $ppid);
         $this->setProcessName('job master ' . $ppid . self::PROCESS_NAME_LOG);
         $reserveProcess = new \Swoole\Process(function () use ($self, $workNum) {
             //设置进程名字
@@ -88,7 +88,7 @@ class Process
 
     private function exit()
     {
-        @unlink($this->config['path'] . '/' . self::PID_FILE);
+        @unlink($this->config['path'] . self::PID_FILE);
         $this->logger->log('Time: ' . microtime(true) . '主进程退出' . "\n");
         foreach ($this->workers as $pid => $worker) {
             //平滑退出，用exit；强制退出用kill

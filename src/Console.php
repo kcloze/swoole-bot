@@ -41,7 +41,7 @@ class Console
      */
     public function stop($signal=SIGTERM)
     {
-        $masterPidFile=$this->config['path'] . '/' . Process::PID_FILE;
+        $masterPidFile=$this->config['path'] . Process::PID_FILE;
         if (file_exists($masterPidFile)) {
             $ppid=file_get_contents($masterPidFile);
             if (empty($ppid)) {
