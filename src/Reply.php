@@ -48,11 +48,13 @@ class Reply
                 // code...
                 break;
             case 'new_friend':
+                echo '新增好友' . $this->message['from']['UserName'] . '请求' . PHP_EOL;
                 Text::send($this->message['from']['UserName'], '客官，等你很久了！感谢跟 oop 交朋友，我是 kcloze 的贴身秘书，当你累了困惑了，可以随时呼叫我！' . PHP_EOL . '高山流水遇知音，知音不在谁堪听？焦尾声断斜阳里，寻遍人间已无');
                 break;
             case 'request_friend':
+                echo '新增好友' . $this->message['from']['UserName'] . '请求，自动通过' . PHP_EOL;
                 $friends = vbot('friends');
-                $friends->approve($message);
+                $friends->approve($this->message);
                 break;
             case 'group_change':
                 Text::send($this->message['from']['UserName'], '欢迎新人 ' . $this->message['invited'] . PHP_EOL . '邀请人：' . $this->message['inviter']);
