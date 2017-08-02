@@ -75,7 +75,7 @@ return $options = [
    ],
    'params'=> [
        'tulingApi'=> 'http://www.tuling123.com/openapi/api',
-       'tulingKey'=> '--自己到图灵机器人平台注册相关账号--',
+       'tulingKey'=> '0c75d147ffcd4191a237649f838e4f45',
    ],
 
 ];
