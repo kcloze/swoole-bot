@@ -2,7 +2,7 @@
 
 /*
  * This file is part of PHP CS Fixer.
- * (c) kcloze <pei.greet@qq.com>
+ *  * (c) kcloze <pei.greet@qq.com>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -15,9 +15,10 @@ class Tuling
 {
     private $client;
 
-    public function __construct($text)
+    public function __construct($options)
     {
         $this->client  = new Client();
+        $this->options =$options;
     }
 
     public function search($text)
