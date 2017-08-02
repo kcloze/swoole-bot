@@ -11,6 +11,8 @@ namespace Kcloze\Bot;
 
 use GuzzleHttp\Client;
 use Hanson\Vbot\Message\Text;
+use Kcloze\Bot\Api\Baidu;
+use Kcloze\Bot\Api\Tuling;
 
 class Reply
 {
