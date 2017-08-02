@@ -12,6 +12,7 @@ namespace Kcloze\Bot;
 class Process
 {
     const PROCESS_NAME_LOG = ' php: swoole-bot'; //shell脚本管理标示
+    const PID_FILE         = 'master.pid';
     private $reserveProcess;
     private $workers;
     private $workNum = 2;
@@ -19,7 +20,7 @@ class Process
 
     public function start($config)
     {
-        \Swoole\Process::daemon(false);
+        \Swoole\Process::daemon(true, true);
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
 
         $this->config = $config;
@@ -36,11 +37,11 @@ class Process
     {
         $self = $this;
         $ppid = getmypid();
-        //file_put_contents($this->config['logPath'] . '/master.pid.log', $ppid . "\n");
-        $this->setProcessName('job master ' . $ppid . $self::PROCESS_NAME_LOG);
+        file_put_contents($this->config['logPath'] . '/' . self::PID_FILE, $ppid);
+        $this->setProcessName('job master ' . $ppid . self::PROCESS_NAME_LOG);
         $reserveProcess = new \Swoole\Process(function () use ($self, $workNum) {
             //设置进程名字
-            $this->setProcessName('job ' . $workNum . $self::PROCESS_NAME_LOG);
+            $this->setProcessName('job ' . $workNum . self::PROCESS_NAME_LOG);
             try {
                 $self->config['session']='swoole-bot' . $workNum;
                 $job = new Robots($self->config);
@@ -48,7 +49,7 @@ class Process
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
-            
+
             echo 'reserve process ' . $workNum . " is working ...\n";
         });
         $pid                 = $reserveProcess->start();
@@ -60,7 +61,7 @@ class Process
     public function registSignal($workers)
     {
         \Swoole\Process::signal(SIGTERM, function ($signo) {
-            $this->exitMaster('收到退出信号,退出主进程');
+            $this->exit();
         });
         \Swoole\Process::signal(SIGCHLD, function ($signo) use (&$workers) {
             while (true) {
@@ -80,10 +81,17 @@ class Process
         });
     }
 
-    private function exitMaster()
+    private function exit()
     {
-        @unlink($this->config['log']['system'] . '/master.pid.log');
+        @unlink($this->config['log']['system'] . '/' . self::PID_FILE);
         $this->log('Time: ' . microtime(true) . '主进程退出' . "\n");
+        foreach ($this->workers as $pid => $worker) {
+            //平滑退出，用exit；强制退出用kill
+            \Swoole\Process::kill($pid);
+            unset($this->workers[$pid]);
+            $this->log('主进程收到退出信号,[' . $pid . ']子进程跟着退出');
+            $this->log('Worker count: ' . count($this->workers));
+        }
         exit();
     }
 
