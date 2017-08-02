@@ -15,11 +15,7 @@ class Baidu
 {
     private $client;
 
-    public function __construct($text)
-    {
-        //$this->client  = new Client();
-        $this->text    = $text;
-    }
+
 
     public function search($word, $page=1)
     {

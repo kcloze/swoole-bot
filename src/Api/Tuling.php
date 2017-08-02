@@ -18,7 +18,6 @@ class Tuling
     public function __construct($text)
     {
         $this->client  = new Client();
-        //s$this->$text   = $text;
     }
 
     public function search($text)
