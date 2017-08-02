@@ -29,7 +29,7 @@ class Reply
         switch ($type) {
             case 'text':
                 //@我或者好友发消息都自动回复
-                if (true == $this->message['isAt'] || $this->message['fromType']=='Friend') {
+                if (true == $this->message['isAt'] || $this->message['fromType'] == 'Friend') {
                     $return=$this->getTulingBot();
                     Text::send($this->message['from']['UserName'], $return);
                 }
@@ -47,16 +47,20 @@ class Reply
             case 'red_packet':
                 // code...
                 break;
+            case 'new_friend':
+                Text::send($this->message['from']['UserName'], '客官，等你很久了！感谢跟 oop 交朋友，我是 kcloze 的贴身秘书，当你累了困惑了，可以随时呼叫我！' . PHP_EOL . '高山流水遇知音，知音不在谁堪听？焦尾声断斜阳里，寻遍人间已无');
+                break;
             case 'request_friend':
-                // code...
+                $friends = vbot('friends');
+                $friends->approve($message);
                 break;
             case 'group_change':
-                // code...
+                Text::send($this->message['from']['UserName'], '欢迎新人 ' . $this->message['invited'] . PHP_EOL . '邀请人：' . $this->message['inviter']);
                 break;
-
             default:
                 // code...
                 break;
+
         }
     }
 

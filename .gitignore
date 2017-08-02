@@ -4,5 +4,5 @@
 composer.lock
 example
 /tmp
-
+src/config.php
 
