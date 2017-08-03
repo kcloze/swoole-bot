@@ -42,8 +42,8 @@ composer install
 
 
 ``` 
-cd src
-php start.php start|stop
+
+php run.php start|stop
 
 ``` 
 
