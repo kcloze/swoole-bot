@@ -9,13 +9,9 @@
 
 namespace Kcloze\Bot\Api;
 
-use GuzzleHttp\Client;
-
 class Baidu
 {
     private $client;
-
-
 
     public function search($word, $page=1)
     {

@@ -38,12 +38,12 @@ composer install
 ### 2.3 修改配置项
 * tulingKey必须配置，[需要先注册图灵机器人信息](http://www.tuling123.com/help/h_cent_webapi.jhtml?nav=doc)
 
-### 2.4 启动服务
+### 2.4 管理服务
 
 
 ``` 
-cd src
-php start.php
+
+php start.php start|stop
 
 ``` 
 

@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * This file is part of PHP CS Fixer.
  * (c) kcloze <pei.greet@qq.com>
@@ -10,8 +9,6 @@
 
 namespace Kcloze\Bot;
 
-use Exception;
-
 class Console
 {
     public $logger    = null;
@@ -20,6 +17,7 @@ class Console
     public function __construct($config)
     {
         $this->config = $config;
+        $this->logger = new Logs($config['path']);
     }
 
     public function run()
@@ -30,19 +28,20 @@ class Console
     public function start()
     {
         //启动
-        $process = new Kcloze\Bot\Process();
-        $process->start($this->config);
+        $process = new Process($this->config);
+        $process->start();
     }
+
     /**
      * 给主进程发送信号：
      *  SIGUSR1 自定义信号，让子进程平滑退出
-     *  SIGTERM 程序终止，让子进程强制退出
+     *  SIGTERM 程序终止，让子进程强制退出.
+     *
      * @param [type] $signal
-     * @return void
      */
     public function stop($signal=SIGTERM)
     {
-        $masterPidFile=$this->config['logPath'] . '/' . Process::PID_FILE;
+        $masterPidFile=$this->config['path'] . Process::PID_FILE;
         if (file_exists($masterPidFile)) {
             $ppid=file_get_contents($masterPidFile);
             if (empty($ppid)) {
@@ -71,6 +70,7 @@ class Console
         sleep(3);
         $this->start();
     }
+
     public function reload()
     {
         $this->logger->log('reload...');
@@ -94,9 +94,6 @@ class Console
             case 'stop':
                 $this->stop();
                 break;
-            case 'reload':
-                $this->reload();
-                break;
             case 'restart':
                 $this->restart();
                 break;
@@ -114,11 +111,11 @@ class Console
     {
         $msg=<<<'EOF'
 NAME
-      run.php - manage daemons
+      run.php - manage swoole-bot
 
 SYNOPSIS
       run.php command [options]
-          Manage multi process daemons.
+          Manage swoole-bot daemons.
 
 
 WORKFLOWS
@@ -140,11 +137,6 @@ WORKFLOWS
       stop
       Stop all running daemons, or specific daemons identified by PIDs. Use
       run.php status to find PIDs.
-
-      reload
-      Gracefully restart daemon processes in-place to pick up changes to
-      source. This will not disrupt running jobs. This is an advanced
-      workflow; most publishing should use run.php reload
 
 EOF;
         echo $msg;

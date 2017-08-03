@@ -7,7 +7,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Kcloze\MultiProcess;
+namespace Kcloze\Bot;
 
 use Exception;
 

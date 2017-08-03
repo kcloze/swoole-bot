@@ -7,7 +7,7 @@
  * with this source code in the file LICENSE.
  */
 
-$path           = __DIR__ . '/../tmp/';
+$path           = __DIR__ . '/tmp/';
 
 return $options = [
    'path'     => $path,

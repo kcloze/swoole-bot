@@ -15,5 +15,4 @@ use Kcloze\Bot\Api\Baidu;
 $baidu =new Baidu();
 $rest  = $baidu->search2('众泰汽车');
 
-
 var_dump($rest);
