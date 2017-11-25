@@ -7,7 +7,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace app\robot\home;
+namespace Kcloze\Bot;
 
 class Process
 {
