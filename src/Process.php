@@ -29,6 +29,16 @@ class Process
         \Swoole\Process::daemon(true, true);
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
 
+        //设置主进程
+        $ppid = getmypid();
+        $pid_file = $this->config['path'] . self::PID_FILE;
+        if(file_exists($pid_file)){
+            echo "已有进程运行中,请先结束或重启\n";
+            die();
+        }
+        file_put_contents($pid_file, $ppid);
+        $this->setProcessName('job master ' . $ppid . self::PROCESS_NAME_LOG);
+
         //根据配置信息，开启多个进程
         for ($i = 0; $i < $this->workNum; $i++) {
             $this->reserveBot($i);
@@ -41,9 +51,6 @@ class Process
     public function reserveBot($workNum)
     {
         $self = $this;
-        $ppid = getmypid();
-        file_put_contents($this->config['path'] . self::PID_FILE, $ppid);
-        $this->setProcessName('job master ' . $ppid . self::PROCESS_NAME_LOG);
         $reserveProcess = new \Swoole\Process(function () use ($self, $workNum) {
             //设置进程名字
             $this->setProcessName('job ' . $workNum . self::PROCESS_NAME_LOG);
@@ -66,7 +73,7 @@ class Process
     public function registSignal($workers)
     {
         \Swoole\Process::signal(SIGTERM, function ($signo) {
-            $this->exit();
+            $this->setExit();
         });
         \Swoole\Process::signal(SIGCHLD, function ($signo) use (&$workers) {
             while (true) {
@@ -86,7 +93,7 @@ class Process
         });
     }
 
-    private function exit()
+    private function setExit()
     {
         @unlink($this->config['path'] . self::PID_FILE);
         $this->logger->log('Time: ' . microtime(true) . '主进程退出' . "\n");
