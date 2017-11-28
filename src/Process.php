@@ -30,9 +30,9 @@ class Process
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
 
         //设置主进程
-        $ppid = getmypid();
+        $ppid     = getmypid();
         $pid_file = $this->config['path'] . self::PID_FILE;
-        if(file_exists($pid_file)){
+        if (file_exists($pid_file)) {
             echo "已有进程运行中,请先结束或重启\n";
             die();
         }
@@ -50,7 +50,7 @@ class Process
     //独立进程
     public function reserveBot($workNum)
     {
-        $self = $this;
+        $self           = $this;
         $reserveProcess = new \Swoole\Process(function () use ($self, $workNum) {
             //设置进程名字
             $this->setProcessName('job ' . $workNum . self::PROCESS_NAME_LOG);
@@ -70,7 +70,7 @@ class Process
     }
 
     //监控子进程
-    public function registSignal($workers)
+    public function registSignal(&$workers)
     {
         \Swoole\Process::signal(SIGTERM, function ($signo) {
             $this->setExit();
