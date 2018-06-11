@@ -27,6 +27,7 @@ class Process
     public function start()
     {
         \Swoole\Process::daemon(true, true);
+        $config = $this->config;
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
 
         //设置主进程
