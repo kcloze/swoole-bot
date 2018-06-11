@@ -27,21 +27,29 @@ class Process
     public function start()
     {
         \Swoole\Process::daemon(true, true);
-        $config = $this->config;
+        $config                                              = $this->config;
         isset($config['swoole']['workNum']) && $this->workNum=$config['swoole']['workNum'];
 
         //设置主进程
         $ppid     = getmypid();
         $pid_file = $this->config['path'] . self::PID_FILE;
         if (file_exists($pid_file)) {
-            echo "已有进程运行中,请先结束或重启\n";
-            die();
+            $pid=file_get_contents($pid_file);
+            if ($pid) {
+                //尝试三次确定是否进程还存在，存在就退出
+                for ($i=0; $i < 3; ++$i) {
+                    if (@\Swoole\Process::kill($pid, 0)) {
+                        die('已有进程运行中,请先结束或重启' . PHP_EOL);
+                    }
+                    sleep(1);
+                }
+            }
         }
         file_put_contents($pid_file, $ppid);
         $this->setProcessName('job master ' . $ppid . self::PROCESS_NAME_LOG);
 
         //根据配置信息，开启多个进程
-        for ($i = 0; $i < $this->workNum; $i++) {
+        for ($i = 0; $i < $this->workNum; ++$i) {
             $this->reserveBot($i);
             sleep(2);
         }
@@ -63,11 +71,11 @@ class Process
                 echo $e->getMessage();
             }
 
-            echo 'reserve process ' . $workNum . " is working ...\n";
+            echo 'reserve process ' . $workNum . ' is working ...' . PHP_EOL;
         });
         $pid                 = $reserveProcess->start();
         $this->workers[$pid] = $reserveProcess;
-        echo "reserve start...\n";
+        echo 'reserve start...' . PHP_EOL;
     }
 
     //监控子进程
@@ -97,7 +105,7 @@ class Process
     private function setExit()
     {
         @unlink($this->config['path'] . self::PID_FILE);
-        $this->logger->log('Time: ' . microtime(true) . '主进程退出' . "\n");
+        $this->logger->log('Time: ' . microtime(true) . '主进程退出' . '' . PHP_EOL);
         foreach ($this->workers as $pid => $worker) {
             //平滑退出，用exit；强制退出用kill
             \Swoole\Process::kill($pid);
