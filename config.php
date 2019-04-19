@@ -73,6 +73,9 @@ return $options = [
            'nickname' => '',
        ],
    ],
+    'load-extension'=>[
+       //\Vbot\GuessNumber\GuessNumber::class
+    ],
    'params'=> [
        'tulingApi'=> 'http://www.tuling123.com/openapi/api',
        'tulingKey'=> '',
