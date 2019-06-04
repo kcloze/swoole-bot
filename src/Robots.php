@@ -28,6 +28,7 @@ class Robots
             $reply=new Reply($message, $this->options);
             $reply->send();
         });
+        $this->robot->messageExtension->load($this->options['load-extension']);
         $this->robot->server->serve();
     }
 }
